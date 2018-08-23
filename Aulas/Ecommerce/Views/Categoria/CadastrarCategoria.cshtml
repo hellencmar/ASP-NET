@@ -1,0 +1,37 @@
+﻿@model Ecommerce.Models.Categoria
+
+@{
+    ViewBag.Title = "CadastrarCategoria";
+    Layout = "~/Views/Shared/Layout.cshtml";
+}
+
+<div>
+    @using (Html.BeginForm("CadastrarCategoria", "Categoria", FormMethod.Post, new{ @class = "form-horizontal" }))
+    {
+        <fieldset>
+            <legend>Cadastrar Categoria</legend>
+            @Html.ValidationSummary(true, null, new { @class = "text-danger" })
+            <div class="form-group">
+                @Html.LabelFor(model => model.Nome, new { @class = "control-label col-sm-2" })
+                <div class="col-sm-10">
+                    @Html.TextBoxFor(model => model.Nome, new {@class = "form-control", @placeholder = "Nome da categoria"})
+                    @Html.ValidationMessageFor(model => model.Nome, null, new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Descricao, new { @class = "control-label col-sm-3" })
+                <div class="col-sm-10">
+                    @Html.TextBoxFor(model => model.Descricao, new{@class = "form-control", @placeholder = "Descrição da categoria"})
+                    @Html.ValidationMessageFor(model => model.Descricao, null, new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <input type="submit" value="Cadastrar" class="btn btn-primary">
+                </div>
+            </div>
+        </fieldset>
+    }
+
+</div>

@@ -1,6 +1,8 @@
 ﻿using Ecommerce.DAL;
 using Ecommerce.Models;
+using System;
 using System.IO;
+using System.Web;
 using System.Web.Mvc;
 
 namespace Ecommerce.Controllers
@@ -10,24 +12,19 @@ namespace Ecommerce.Controllers
         // GET: Produto
         public ActionResult Index()
         {
-            return View();
+            ViewBag.Data = DateTime.Now;
+            return View(ProdutoDAO.RetornarProdutos());
         }
         public ActionResult CadastrarProduto()
         {
-            ViewBag.Categorias =
-                new SelectList(CategoriaDAO.RetornarCategorias(),
-                "CategoriaId", "Nome");
-
+            ViewBag.Categorias = new SelectList(CategoriaDAO.RetornarCategorias(), "CategoriaId", "Nome");
             return View();
         }
 
         [HttpPost]
-        public ActionResult CadastrarProduto(Produto produto,
-            int? Categorias, HttpPostedFileBase fupImagem)
+        public ActionResult CadastrarProduto(Produto produto, int? Categorias, HttpPostedFileBase fupImagem)
         {
-            ViewBag.Categorias =
-                new SelectList(CategoriaDAO.RetornarCategorias(),
-                "CategoriaId", "Nome");
+            ViewBag.Categorias = new SelectList(CategoriaDAO.RetornarCategorias(),"CategoriaId", "Nome");
 
             if (ModelState.IsValid)
             {
@@ -36,8 +33,7 @@ namespace Ecommerce.Controllers
                     if (fupImagem != null)
                     {
                         string nomeImagem = Path.GetFileName(fupImagem.FileName);
-                        string caminho = Path.Combine(Server.MapPath("~/Images/"),
-                            nomeImagem);
+                        string caminho = Path.Combine(Server.MapPath("~/Images/"), nomeImagem);
                         fupImagem.SaveAs(caminho);
                         produto.Imagem = nomeImagem;
                     }

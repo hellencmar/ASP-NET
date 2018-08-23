@@ -1,0 +1,40 @@
+﻿@using Ecommerce.Models
+@model List<Categoria>
+@{
+    DateTime data = ViewBag.Data;
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/Layout.cshtml";
+}
+
+<div>
+    <h2>Gerenciamento de Categorias</h2>
+
+    @Html.ActionLink("Cadastrar Categoria", "CadastrarCategoria", "Categoria")
+
+    <table class="table table-hover table-striped" style="margin-top:30px">
+        <tr>
+            <th>Nome</th>
+            <th>Descrição</th>
+            <th></th>
+            <th></th>
+        </tr>
+        @foreach (Categoria categoriaCadastrado in Model)
+        {
+            <tr>
+                <td>@categoriaCadastrado.Nome</td>
+                <td>@categoriaCadastrado.Descricao</td>
+
+                <td>
+                    @Html.ActionLink("Remover", "RemoverCategoria", "Categoria", new { id = categoriaCadastrado.CategoriaId }, null)
+                </td>
+
+                <td>
+                    @Html.ActionLink("Alterar", "AlterarCategoria", "Categoria", new { id = categoriaCadastrado.CategoriaId }, null)
+                </td>
+            </tr>
+        }
+    </table>
+
+    <p>Dados atualizados às: <b> @data </b></p>
+
+</div>

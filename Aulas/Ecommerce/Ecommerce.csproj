@@ -95,7 +95,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\bootstrap.min.css" />
     <Content Include="Global.asax" />
+    <Content Include="Images\semimagem.jpg" />
+    <Content Include="scripts\ai.0.22.9-build00167.js" />
+    <Content Include="scripts\ai.0.22.9-build00167.min.js" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -125,6 +129,16 @@
   <ItemGroup>
     <Content Include="Views\web.config" />
     <None Include="packages.config" />
+    <Content Include="Views\Shared\Layout.cshtml" />
+    <Content Include="Views\Produto\Index.cshtml" />
+    <Content Include="Views\Produto\CadastrarProduto.cshtml" />
+    <Content Include="Views\Produto\AlterarProduto.cshtml" />
+    <Content Include="Views\Categoria\Index.cshtml" />
+    <Content Include="Views\Categoria\CadastrarCategoria.cshtml" />
+    <Content Include="Views\Categoria\AlterarCategoria.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Home\DetalheProduto.cshtml" />
+    <Content Include="Views\Home\CarrinhoCompras.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -134,9 +148,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Categoria\" />
-    <Folder Include="Views\Home\" />
-    <Folder Include="Views\Produto\" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201808231447566_CriarBanco.resx">

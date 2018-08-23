@@ -1,0 +1,28 @@
+﻿@model IEnumerable<Ecommerce.Models.Produto>
+@using Ecommerce.Models
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/Layout.cshtml";
+    List<Categoria> categorias = ViewBag.Categorias;
+}
+
+<ul style="text-align:center; margin-top: 30px; margin-bottom: 30px" class="nav nav-tabs">
+    @foreach (Categoria item in categorias)
+    {
+        <li class="nav-item">
+            @Html.ActionLink(item.Nome, "Index", "Home", new { id = item.CategoriaId }, new { @class = "nav-link" })
+        </li>
+    }
+</ul>
+
+<div class="row" style="margin-top:30px">
+    @foreach (Produto item in Model)
+    {
+        <div class="col-sm-3" style="text-align:center; margin-bottom:30px">
+            <img class="img-thumbnail" src="~/Images/@item.Imagem" style="width:200px;height:150px;margin-bottom:15px" />
+            @Html.ActionLink(item.Nome, "DetalheProduto", "Home", new { id = item.ProdutoId }, null)<br />
+            <b>Preço: </b>@item.Preco.ToString("C2")<br />
+            @Html.ActionLink("Adicionar", "AdicionarAoCarrinho", "Home", new { id = item.ProdutoId}, new { @class = "btn btn-success" })
+        </div>
+    }
+</div>
