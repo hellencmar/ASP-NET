@@ -36,7 +36,7 @@
                 total = total + subtotal;               
             }
             <td>@subtotal.ToString("C2")</td>
-            <td> @Html.ActionLink("Remover", "RemoverItemVenda", new { id = item.ItemVendaId }, null)</td>
+            <td> @Html.ActionLink("Remover", "RemoverItemVenda", "Home", new { id = item.ItemVendaId }, null)</td>
         </tr>
     }
 </table>
