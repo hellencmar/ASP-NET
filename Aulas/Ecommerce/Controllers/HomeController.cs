@@ -16,6 +16,7 @@ namespace Ecommerce.Controllers
             {
                 return View(ProdutoDAO.RetornarProdutos());
             }
+            ViewBag.QtdCarrinho = ItemVendaDAO.BuscarItensNoCarrinho(carrinhoId);
 
             return View(ProdutoDAO.BuscarProdutosPorCategoria(id));
         }

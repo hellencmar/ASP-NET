@@ -64,5 +64,9 @@ namespace Ecommerce.DAL
                 ctx.SaveChanges();
             }
         }
+        public static List<ItemVenda> BuscarItensNoCarrinho(string carrinhoID)
+        {
+            return ctx.ItensVenda.Include("Produto").Where(x => x.CarrinhoId == carrinhoID).ToList();
+        }
     }
 }
