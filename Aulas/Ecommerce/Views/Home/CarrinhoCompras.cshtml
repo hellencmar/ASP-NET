@@ -3,6 +3,7 @@
 @{
     ViewBag.Title = "CarrinhoCompras";
     Layout = "~/Views/Shared/Layout.cshtml";
+    double total = 0;
 }
 
 <h2>Carrinho de Compras</h2>
@@ -14,6 +15,7 @@
         <th>Quantidade</th>
         <th>Preço</th>
         <th>Subtotal</th>
+        <th></th>
     </tr>
 
     @foreach (ItemVenda item in Model)
@@ -23,12 +25,24 @@
                 <img src="~/Images/@item.Produto.Imagem" alt="Imagem do produto" style="width:100px" />
             </td>
             <td>@item.Produto.Nome</td>
-            <td>@item.Quantidade</td>
+            <td>
+                <b> @Html.ActionLink("-", "DiminuirQtd", "Home", new { Id = item.ItemVendaId }, new { @class = "btn btn-warning" })  </b>
+                    @item.Quantidade
+                <b> @Html.ActionLink("+", "AumentarQtd", "Home", new { Id = item.ItemVendaId }, new { @class = "btn btn-success" })  </b>
+            </td>
             <td>@item.Preco.ToString("C2")</td>
             @{
                 double subtotal = item.Quantidade * item.Preco;
+                total = total + subtotal;               
             }
             <td>@subtotal.ToString("C2")</td>
+            <td> @Html.ActionLink("Remover", "RemoverItemVenda", new { id = item.ItemVendaId }, null)</td>
         </tr>
     }
 </table>
+<div class="card border-success mb-3" style="max-width: 20rem;">
+    <div class="card-body">
+        <h4 class="card-title">Total do carrinho: </h4>
+        <p class="card-text">@total.ToString("C2")</p>
+    </div>
+</div>

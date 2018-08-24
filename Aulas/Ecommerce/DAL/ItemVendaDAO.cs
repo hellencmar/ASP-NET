@@ -18,6 +18,39 @@ namespace Ecommerce.DAL
         {
             string carrinhoId = Sessao.RetonarCarrinhoId();
             return ctx.ItensVenda.Include("Produto").Where(x => x.CarrinhoId.Equals(carrinhoId)).ToList();
+        }      
+        public static Produto BuscarProdutoPorItemId(int id)
+        {
+            ItemVenda item = ctx.ItensVenda.Find(id);
+
+            return item.Produto;
+        }
+        public static ItemVenda BuscarItemVendaPorID(int id)
+        {
+            ItemVenda itemVenda = ctx.ItensVenda.Find(id);
+            return itemVenda;
+        }
+        public static void AumentarQtdItem(ItemVenda itemVenda)
+        {
+              ++itemVenda.Quantidade;
+                ctx.SaveChanges();         
+        }
+        public static void DiminuirQtdItem(ItemVenda itemVenda)
+        {
+            if(itemVenda.Quantidade > 1)
+            --itemVenda.Quantidade;
+              ctx.SaveChanges();
+        }
+        public static void RemoverItemVenda(ItemVenda itemVenda)
+        {
+            if(itemVenda.Quantidade > 1)
+            {
+                DiminuirQtdItem(itemVenda);
+            }
+            else if(itemVenda.Quantidade == 1)
+            {
+                ctx.ItensVenda.Remove(itemVenda);
+            }
         }
     }
 }

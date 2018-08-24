@@ -40,8 +40,26 @@ namespace Ecommerce.Controllers
 
         public ActionResult CarrinhoCompras()
         {
-            return View(ItemVendaDAO.
-                BuscarItensVendaPorCarrinhoId());
+            return View(ItemVendaDAO.BuscarItensVendaPorCarrinhoId());
+        }
+        public ActionResult AumentarQtd(int id)
+        {
+            ItemVenda itemVenda = ItemVendaDAO.BuscarItemVendaPorID(id);
+            ItemVendaDAO.AumentarQtdItem(itemVenda);
+            return RedirectToAction("CarrinhoCompras");
+        }
+        public ActionResult DiminuirQtd(int id)
+        {
+            ItemVenda itemVenda = ItemVendaDAO.BuscarItemVendaPorID(id);
+            ItemVendaDAO.DiminuirQtdItem(itemVenda);
+            return RedirectToAction("CarrinhoCompras");
+        }
+       
+        public ActionResult RemoverItemVenda(int id)
+        {
+            ItemVenda itemVenda = ItemVendaDAO.BuscarItemVendaPorID(id);
+            ItemVendaDAO.RemoverItemVenda(itemVenda);
+            return RedirectToAction("CarrinhoCompras");
         }
     }
 }
