@@ -10,8 +10,18 @@ namespace Ecommerce.DAL
         private static Context ctx = SingletonContext.GetInstance();
         public static void CadastrarItemVenda(ItemVenda itemVenda)
         {
-            ctx.ItensVenda.Add(itemVenda);
-            ctx.SaveChanges();
+            string carrinhoId = Sessao.RetonarCarrinhoId();
+            Produto produto = itemVenda.Produto;
+            ItemVenda itemVendaDb = ctx.ItensVenda.FirstOrDefault(x => x.Produto.ProdutoId == produto.ProdutoId && x.CarrinhoId == carrinhoId);
+            if (itemVendaDb == null)
+            {
+                ctx.ItensVenda.Add(itemVenda);
+                ctx.SaveChanges();
+            }
+            else
+            {
+                AumentarQtdItem(itemVendaDb);
+            }
         }
 
         public static List<ItemVenda> BuscarItensVendaPorCarrinhoId()

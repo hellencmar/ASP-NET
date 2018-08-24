@@ -10,11 +10,13 @@ namespace Ecommerce.Controllers
     {
         public ActionResult Index(int? id)
         {
+            string carrinhoId = Sessao.RetonarCarrinhoId();
             ViewBag.Categorias = CategoriaDAO.RetornarCategorias();
             if (id == null)
             {
                 return View(ProdutoDAO.RetornarProdutos());
             }
+
             return View(ProdutoDAO.BuscarProdutosPorCategoria(id));
         }
 
