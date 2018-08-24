@@ -46,10 +46,12 @@ namespace Ecommerce.DAL
             if(itemVenda.Quantidade > 1)
             {
                 DiminuirQtdItem(itemVenda);
+           
             }
             else if(itemVenda.Quantidade == 1)
             {
                 ctx.ItensVenda.Remove(itemVenda);
+                ctx.SaveChanges();
             }
         }
     }
